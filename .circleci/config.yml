@@ -30,7 +30,7 @@
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@4.0.0 # use the AWS S3 orb in your configuration
+  aws-s3: circleci/aws-s3@1.0.4 # use the AWS S3 orb in your configuration
 
 workflows: # Define a Workflow running the build job, then the deploy job
   build-deploy: # Make a workflow to build and deploy your project
@@ -54,9 +54,9 @@ jobs: # Define the build and deploy jobs
       - aws-s3/sync:
           from: dist
           to: 's3://demo-ci-cd-article/'
-          arguments: |
+          arguments: | # Optional arguments
             --acl public-read \
-            --cache-control "max-age=86400" \
+            --cache-control "max-age=86400"
   deploy:
     docker: # Use the Docker executor for the deploy job
       - image: cimg/node:14.17.3 # Specify the Docker image to use for the deploy job
