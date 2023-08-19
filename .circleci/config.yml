@@ -46,7 +46,7 @@ workflows: # Define a Workflow running the build job, then the deploy job
 jobs: # Define the build and deploy jobs
   build:
     docker: # Use the Docker executor for the build job
-      - image: cimg/base:2021.04 # Specify the Docker image to use for the build job
+      - image: cimg/node:20.5.1 # Specify the Docker image to use for the build job
     steps:
       - checkout
       - run: npm install
@@ -57,10 +57,9 @@ jobs: # Define the build and deploy jobs
           arguments: |
             --acl public-read \
             --cache-control "max-age=86400" \
-          overwrite: true
   deploy:
     docker: # Use the Docker executor for the deploy job
-      - image: cimg/base:2021.04 # Specify the Docker image to use for the deploy job
+      - image: cimg/node:20.5.1 # Specify the Docker image to use for the deploy job
     steps:
       - checkout
       - aws-s3/sync:
